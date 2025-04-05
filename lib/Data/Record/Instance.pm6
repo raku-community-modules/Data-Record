@@ -9,24 +9,24 @@ proto method new(::?ROLE:_: |)                               {*}
 # multi method new(::?ROLE:_: T, Bool:D :$coerce! where ?*)  { ... }
 
 #|[ Wraps a data structure, typechecking it to ensure it matches this record
-    type. This is done recursively for record type fields. ]
-method wrap(::?ROLE:_: T --> T) { ... }
-#=[ This will die with X::Data::Record::Missing if any fields are missing from
+    type. This is done recursively for record type fields.
+    This will die with X::Data::Record::Missing if any fields are missing from
     the data structure, and X::Data::Record::Extraneous if any extraneous fields
     exist within it. ]
+method wrap(::?ROLE:_: T --> T) { ... }
 
 #|[ Consumes a data structure, stripping any extraneous fields so it matches
-    this record type. This is done recursively for record type fields. ]
-method consume(::?ROLE:_: T --> T) { ... }
-#=[ This will die with X::Data::Record::Missing if any fields are missing from
+    this record type. This is done recursively for record type fields.
+    This will die with X::Data::Record::Missing if any fields are missing from
     the data structure. ]
+method consume(::?ROLE:_: T --> T) { ... }
 
 #|[ Subsumes a data structure, filling out any missing fields if possible so
     it matches this record type. This is done recursively for record type
-    fields. ]
-method subsume(::?ROLE:_: T --> T) { ... }
-#=[ This will die with X::Data::Record::Extraneous if any extraneous fields
+    fields.
+    This will die with X::Data::Record::Extraneous if any extraneous fields
     exist within the data structure. ]
+method subsume(::?ROLE:_: T --> T) { ... }
 
 #|[ Coerces a data structure, both consuming any extraneous fields and filling
     out any missing fields if possible. This is done recursively for record

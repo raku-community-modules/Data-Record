@@ -57,7 +57,7 @@ DESCRIPTION
 
 `Data::Record` is a library that adds support for record types to Raku. Operators for creating record types for maps, lists, and tuples are included. Data structures can then be coerced to these record types using the coercion operators provided, some of which will sanitize them, all of which allow for efficient typechecking for common operations you can do with them.
 
-For documentation on how this library can be used, refer to the [wiki](https://github.com/raku-community-modules/Data-Record/wiki/).
+For documentation on how this library can be used, refer to the [wiki](https://github.com/Kaiepi/p6-Data-Record/wiki/).
 
 AUTHOR
 ======

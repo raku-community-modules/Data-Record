@@ -29,15 +29,15 @@ method publish_type_cache(::?ROLE:D: Mu $obj is raw) is raw {
     $result
 }
 
-#|[ A number of annotations we promise to keep via this specific HOW. ]
+#|[ A number of annotations we promise to keep via this specific HOW.
+    MROish; typically called with .* dispatch. ]
 method annotations(::?ROLE:_: $? --> 3) { }
-#=[ MROish; typically called with .* dispatch. ]
 
-#|[ A position for a list of annotations for this metaobject. ]
+#|[ A position for a list of annotations for this metaobject.
+    Depending on this in a subtype requires an annotations offset to skip. ]
 method annotation_offset(::?ROLE:_: Mu $obj? is raw --> Int:D) {
     self.*annotations($obj).skip.sum
 }
-#=[ Depending on this in a subtype requires an annotations offset to skip. ]
 
 #|[ The fields defining this record type. ]
 method fields(::?ROLE:D: Mu $obj is raw) {

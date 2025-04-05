@@ -379,7 +379,13 @@ my class ListIterator does Iterator {
 #|[ Iterator for array ops taking lists of values (push/unshift/append/prepend).
     This is mostly identical to ListIterator, but adds
     behaviour to handle checking the arity of the list, which is handled in
-    such a way as to support lazy lists. ]
+    such a way as to support lazy lists.
+    Array ops can get passed lazy lists, though Array does not support
+    this. We can't throw X::Cannot::Lazy ourselves; what if someone defines
+    their own List subtype with methods that support them? Instead, we can
+    check the arity whenever this iterator's values get pushed onto the
+    relevant iterator of our record, so we have some way to check the
+    list's arity without using the elems method. ]
 my class ArrayIterator is ListIterator {
     method push-all(::?CLASS:D: \target --> IterationEnd) {
         my IterationBuffer \buffer .= new;
@@ -390,12 +396,6 @@ my class ArrayIterator is ListIterator {
         }
     }
 }
-#=[ Array ops can get passed lazy lists, though Array does not support
-    this. We can't throw X::Cannot::Lazy ourselves; what if someone defines
-    their own List subtype with methods that support them? Instead, we can
-    check the arity whenever this iterator's values get pushed onto the
-    relevant iterator of our record, so we have some way to check the
-    list's arity without using the elems method. ]
 
 multi sub circumfix:<[@ @]>(+@fields is raw, Str :$name --> Mu) is export {
     my $obj := MetamodelX::RecordHOW[

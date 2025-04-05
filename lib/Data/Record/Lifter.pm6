@@ -5,7 +5,9 @@ use Data::Record::Instance;
 
 my constant I = Data::Record::Instance;
 
-#|[ A control exception containing the operands of a failed record typecheck. ]
+#|[ A control exception containing the operands of a failed record typecheck.
+    This is thrown primarily by Data::Record::Lifter, which is how it can be
+    decoupled from record instances' value mapping metamethods. ]
 class CX::Rest does X::Control {
     #|[ The value in a record typecheck. ]
     has $.value is built(:bind) is required;
@@ -25,8 +27,6 @@ class CX::Rest does X::Control {
 
     method message(::?CLASS:D: --> '<rest control exception>') { }
 }
-#=[ This is thrown primarily by Data::Record::Lifter, which is how it can be
-    decoupled from record instances' value mapping metamethods. ]
 
 #|[ Lifts the type of a value to that of an arbitrary record field. That will
     smartmatch given the value, throwing CX::Rest should that fail. A nested
